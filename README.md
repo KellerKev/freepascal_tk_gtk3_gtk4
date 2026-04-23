@@ -215,6 +215,8 @@ Same GTK skin, different language bindings:
 
 The Nim and FPC projects source the exact same `gtk_skin.tcl` file — it was ported from Python once and is now doing triple duty.
 
+- [rust_tk_gtk3_gtk4](https://github.com/KellerKev/rust_tk_gtk3_gtk4) — Rust bindings for Tcl/Tk, hand-written FFI + `Result`-based API + closures as Tcl commands, same shared `resources/gtk_skin.tcl`.
+
 ## License
 
 MIT.
