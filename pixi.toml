@@ -1,0 +1,50 @@
+[workspace]
+name = "freepascal_tk_gtk3_gtk4"
+version = "0.1.0"
+description = "Free Pascal bindings for Tcl/Tk plus a GTK3/GTK4 skin"
+authors = ["Kevin Keller <kellerkev@gmail.com>"]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
+
+[dependencies]
+# Tk ships with matching Tcl runtime + headers.
+tk = "*"
+# Needed by the bootstrap script.
+curl = "*"
+xz = "*"
+jq = "*"
+
+[activation.env]
+CPATH = "$CONDA_PREFIX/include"
+LIBRARY_PATH = "$CONDA_PREFIX/lib"
+DYLD_LIBRARY_PATH = "$CONDA_PREFIX/lib"
+FPC_HOME = "$PIXI_PROJECT_ROOT/.local-fpc"
+PATH = "$PIXI_PROJECT_ROOT/.local-fpc/bin:$PATH"
+
+[tasks.setup]
+description = "Download FPC toolchain (first-run only)"
+cmd = "bash scripts/setup-fpc.sh"
+
+[tasks.build]
+description = "Compile the demo"
+cmd = "bash scripts/build.sh"
+depends-on = ["setup"]
+
+[tasks.demo]
+cmd = "./build/demo"
+depends-on = ["build"]
+
+[tasks.demo3]
+cmd = "./build/demo --style=gtk3"
+depends-on = ["build"]
+
+[tasks.demo4]
+cmd = "./build/demo --style=gtk4"
+depends-on = ["build"]
+
+[tasks.demo-dark]
+cmd = "./build/demo --style=gtk4 --dark"
+depends-on = ["build"]
+
+[tasks.clean]
+cmd = "rm -rf build"

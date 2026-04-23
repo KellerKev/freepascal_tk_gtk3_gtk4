@@ -1,0 +1,12 @@
+# pixi environment (lockfile is committed for reproducibility)
+.pixi/*
+!.pixi/config.toml
+
+# Project-local Free Pascal toolchain bootstrapped by `pixi run setup`
+.local-fpc/
+
+# Build artifacts
+build/
+*.o
+*.ppu
+*.rsj
